@@ -1,0 +1,57 @@
+@import "clearfix";
+
+$small: "only screen" !default;
+$medium: "only screen and (min-width: 40.063em)" !default;
+$large: "only screen and (min-width: 64.063em)" !default;
+
+@mixin grid-classes($size, $columns) {
+    $dirs: left, right;
+
+    @each $dir in $dirs {
+        .#{$size}-#{$dir} { float: $dir; }
+    }
+
+    @for $i from 1 through $columns {
+        .#{$size}-#{$i} {
+            float: left;
+            width: ($i * 100% / $columns);
+        }
+    }
+}
+
+@mixin grid($block-size: 10em, $columns: 12, $gutter: 1.5em) {
+    .row {
+        @extend %clearfix;
+
+        padding-right: $gutter;
+        padding-left: $gutter;
+        margin-right: $gutter * -2;
+        margin-left: $gutter * -2;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .col { padding: $gutter; }
+
+    @media #{$small} {
+        @include grid-classes($size: small, $columns: $columns);
+    }
+
+    @media #{$medium} {
+        @include grid-classes($size: medium, $columns: $columns);
+    }
+
+    @media #{$large} {
+        @include grid-classes($size: large, $columns: $columns);
+    }
+
+    @for $i from 1 through $columns {
+        .block-#{$i} {
+            display: inline-block;
+            vertical-align: top;
+            width: $i * $block-size;
+            max-width: 100%;
+            padding: $gutter;
+        }
+    }
+}

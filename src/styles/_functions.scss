@@ -1,0 +1,154 @@
+$modules: () !default;
+
+@mixin exports($name) {
+    @if (not index($modules, $name)) {
+        $modules: append($modules, $name) !global;
+
+        @content;
+    }
+}
+
+@function lightness($color) {
+    $r: red(rgba($color, 1));
+    $g: green(rgba($color, 1));
+    $b: blue(rgba($color, 1));
+
+    @return ($r * .2126 + $g * .7152 + $b * .0722) / 255;
+}
+
+@function string-replace($string, $substr, $newsubstr: "", $all: false) {
+    $position-found: str-index($string, $substr);
+    $processed: ();
+
+    @while ($position-found and $position-found > 0) {
+        $length-substr: str-length($substr);
+
+        @if (1 != $position-found) {
+            $processed: append($processed, str-slice($string, 0, $position-found - 1));
+        }
+
+        $processed: append($processed, $newsubstr);
+        $string: str-slice($string, $position-found + $length-substr);
+
+        $position-found: 0;
+
+        @if ($all == true) {
+            $position-found: str-index($string, $substr);
+        }
+    }
+
+    $processed: append($processed, $string);
+    $string: "";
+
+    @each $s in $processed {
+        $string: #{$string}#{$s};
+    }
+
+    @return $string;
+}
+
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+}
+
+$rem-base: 10px;
+
+@function rem-calc($sizes, $base: $rem-base) {
+    $rem-vals: ();
+
+    @each $size in $sizes {
+        $value: strip-unit($size) / strip-unit($rem-base) * 1rem;
+        $rem-vals: append($rem-vals, $value);
+    }
+
+    @if length($rem-vals) == 1 {
+        @return nth($rem-vals, 1);
+    } @else {
+        @return $rem-vals;
+    }
+}
+
+@mixin rem($property, $values) {
+    $px : ();
+    $rem: ();
+
+    @each $value in $values {
+        @if $value == 0 or $value == auto {
+            $px : append($px, $value);
+            $rem: append($rem, $value);
+        } @else if type-of(strip-unit($value)) == number {
+            $px : append($px, $value);
+            $rem: append($rem, rem-calc($value));
+        } @else {
+            $px : append($px, $value);
+            $rem: append($rem, $value);
+        }
+    }
+
+    @if $px == $rem {
+        #{$property}: $px;
+    } @else {
+        #{$property}: $px;
+        #{$property}: $rem;
+    }
+}
+
+@mixin retina($ratio: 2) {
+    @media
+    only screen and (-webkit-min-device-pixel-ratio: #{$ratio}),
+    only screen and (-moz-min-device-pixel-ratio: #{$ratio}),
+    only screen and (-o-min-device-pixel-ratio: #{$ratio}/1),
+    only screen and (min-device-pixel-ratio: #{$ratio}),
+    only screen and (min-resolution:  #{$ratio * 96dpi}),
+    only screen and (min-resolution: #{$ratio * 1dppx}) {
+        @content;
+    }
+}
+
+@mixin prefix($property, $value, $vendors: webkit moz ms o) {
+    @if $vendors {
+        @each $vendor in $vendors {
+            #{"-" + $vendor + "-" + $property}: #{$value};
+        }
+    }
+
+    #{$property}: #{$value};
+}
+
+@mixin declare-font-face($font-family, $font-filename, $font-filepath, $font-weight: normal, $font-style: normal, $font-stretch: normal) {
+    @font-face {
+        font-family: "#{$font-family}";
+        src: url("#{$font-filepath}/#{$font-filename}.eot");
+        src: url("#{$font-filepath}/#{$font-filename}.eot?#iefix") format("embedded-opentype"),
+             url("#{$font-filepath}/#{$font-filename}.woff") format("woff"),
+             url("#{$font-filepath}/#{$font-filename}.ttf") format("truetype"),
+             url("#{$font-filepath}/#{$font-filename}.svg##{$font-family}") format("svg");
+
+        font-weight: $font-weight;
+        font-style: $font-style;
+        font-stretch: $font-stretch;
+    }
+}
+
+@mixin font-smoothing($value) {
+    -webkit-font-smoothing: $value;
+
+    @if $value == antialiased {
+        -moz-osx-font-smoothing: grayscale;
+    } @else if $value == subpixel-antialiased or $value == auto {
+        -moz-osx-font-smoothing: auto;
+    } @else {
+        -moz-osx-font-smoothing: $value;
+    }
+}
+
+@mixin keyframes($animation) {
+    @-webkit-keyframes #{$animation} { @content; }
+
+    @-moz-keyframes #{$animation} { @content; }
+
+    @-ms-keyframes #{$animation} { @content; }
+
+    @keyframes #{$animation} { @content; }
+}
+

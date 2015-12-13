@@ -1,0 +1,154 @@
+@import "functions";
+@import "reset";
+
+@include exports("base") {
+    /**
+     * Link:
+     *
+     *     @example
+     *     a(href="#") A sample link
+     */
+
+    a {
+        @extend %snappy;
+
+        color: #5780d3;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+        &:hover, &:focus {
+            background-color: rgba(0, 0, 0, .05);
+            border-color: currentColor;
+        }
+
+        &:active {
+            background-color: rgba(0, 0, 0, .1);
+            border-color: currentColor;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+
+    /**
+     * Headings:
+     * Different levels of headings represent hierarchy in content
+     *
+     *     @example
+     *     h1 Heading 1
+     *     h2 Heading 2
+     *     h3 Heading 3
+     *     h4 heading 4
+     */
+
+    h1, h2, h3, h4 {
+        font-weight: 700;
+        margin-top: .2em;
+        margin-bottom: .5em;
+    }
+
+    h1 { font-size: 2.4em; }
+
+    h2 { font-size: 1.8em; }
+
+    h3 { font-size: 1.2em; }
+
+    h4 { font-size: 1em; }
+
+
+    /**
+     * Paragraph:
+     *
+     *     @example
+     *     p This is just a sample paragraph. Paragraphs can contain multiple sentences.
+     */
+
+    p { margin-bottom: 1.2em; }
+
+
+    /**
+     * Lists:
+     *
+     *     @example
+     *     h4 Ordered lists
+     *     p
+     *       ol
+     *         li Item 1
+     *         li Item 2
+     *         li Item 3
+     *     h4 Unordered lists
+     *     p
+     *       ul
+     *         li Item 1
+     *         li Item 2
+     *         li Item 3
+     */
+
+    ul, ol { margin: 1em 0 1em 2em; }
+
+
+    /**
+     * Code:
+     *
+     *     @example
+     *     code .code { display: inline; }
+     */
+
+    code {
+        font-weight: 700;
+        font-family: monospace;
+        line-height: 1.2em;
+    }
+
+
+    /**
+     * Preformatted text:
+     *
+     *     @example:
+     *     pre |    1    |    2    |    3    |
+     */
+
+    pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        padding: 1em;
+        margin: 1em 0;
+        background-color: rgba(0, 0, 0, .05);
+    }
+
+
+    /**
+     * Blockquote:
+     *
+     *     @example:
+     *     blockquote Math is easy, design is hard
+     */
+
+    blockquote {
+        font-size: 1.5em;
+        font-style: italic;
+        margin: 1em 0;
+        padding-left: 1em;
+        border-left: 2px solid rgba(0, 0, 0, .1);
+    }
+
+
+    /**
+     * Horizontal ruler:
+     *
+     *     @example:
+     *     hr
+     */
+
+    hr {
+        border: 0;
+        height: 1px;
+        margin: 1em 0;
+        background-color: currentColor;
+        opacity: .3;
+    }
+}
+
