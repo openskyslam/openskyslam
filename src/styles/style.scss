@@ -12,20 +12,18 @@ html, body { height: 100%; }
 
 body {
     font-family: Lato, "Open Sans", MundoSans, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.624;
+    text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3 {
     font-family: Raleway, sans-serif;
+    font-weight: 100;
 }
 
 @mixin banner-image($size: 1, $suffix: "") {
     background-image: url(../../assets/cover#{$suffix}@#{$size}x.jpg);
-}
-
-%overlay {
-    background-color: rgba(0, 0, 0, .5);
 }
 
 .cover {
@@ -38,18 +36,6 @@ h1, h2, h3 {
     background-position: center;
     height: 100%;
     width: 100%;
-
-    &:before {
-        @extend %overlay;
-
-        content: "";
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-    }
 
     &-inner {
         position: relative;
@@ -82,25 +68,21 @@ h1, h2, h3 {
         @include retina(1.3) { @include banner-image(1.5); }
 
         @include retina(2) { @include banner-image(2); }
-
-        @include retina(3) { @include banner-image(3); }
     }
 
     @media only screen and (min-device-width: 640px) and (orientation: landscape) {
         @include banner-image(1.5);
 
-        @include retina(1.3) { @include banner-image(2); }
+        @include retina(1.3) { @include banner-image(3); }
 
-        @include retina(2) { @include banner-image(3); }
+        @include retina(2) { @include banner-image(4); }
     }
 
     @media only screen and (min-device-width: 960px) and (orientation: landscape) {
         @include banner-image(2);
 
-        @include retina(1.3) { @include banner-image(3); }
+        @include retina(1.3) { @include banner-image(4); }
     }
-
-    @media only screen and (min-device-width: 1280px) and (orientation: landscape) { @include banner-image(3); }
 
     @media only screen and (orientation: potrait) {
         @include banner-image(1, "-potrait");
@@ -108,43 +90,78 @@ h1, h2, h3 {
         @include retina(1.3) { @include banner-image(1.5, "-potrait"); }
 
         @include retina(2) { @include banner-image(2, "-potrait"); }
-
-        @include retina(3) { @include banner-image(3, "-potrait"); }
     }
 
     @media only screen and (min-device-width: 320px) and (orientation: potrait) {
         @include banner-image(1.5, "-potrait");
 
-        @include retina(1.3) { @include banner-image(2, "-potrait"); }
+        @include retina(1.3) { @include banner-image(3, "-potrait"); }
 
-        @include retina(2) { @include banner-image(3, "-potrait"); }
+        @include retina(2) { @include banner-image(4, "-potrait"); }
     }
 
     @media only screen and (min-device-width: 414px) and (orientation: potrait) {
         @include banner-image(2, "-potrait");
 
-        @include retina(1.3) { @include banner-image(3, "-potrait"); }
+        @include retina(1.3) { @include banner-image(4, "-potrait"); }
     }
-
-    @media only screen and (min-device-width: 640px) and (orientation: potrait) { @include banner-image(3, "-potrait"); }
 }
 
-.logo {
-    line-height: 1.3;
+.logo-large {
+    height: 300px;
+    width: 300px;
+    margin: auto;
+    background-image: url(../../assets/logo-large.png);
+    background-size: contain;
+    background-repeat: no-repeat;
 
-    &-wrapper { padding: .5em; }
+    @include retina(1.3) { background-image: url(../../assets/logo-large@1.5x.png); }
+
+    @include retina(2) { background-image: url(../../assets/logo-large@2x.png); }
+
+    @media only screen and (min-width: 40em) {
+        height: 400px;
+        width: 400px;
+    }
+}
+
+.logo-text {
+    line-height: 1.3;
 
     > h1 {
         font-size: 1.2em;
-        font-weight: 400;
         margin: 0;
 
         @media #{$mobile-screen} { font-size: 1.5em; }
     }
 }
 
-.heading-fancy {
+.collage {
+    display: block;
+    margin: auto;
+}
+
+.separator-ornament {
+    display: block;
+    padding: 1em 2em;
+    margin: auto;
+    opacity: .3;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
     text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
 }
 
 .navigation {
@@ -201,7 +218,7 @@ h1, h2, h3 {
 .section-content {
     max-width: 60em;
     margin: auto;
-    padding: 2em;
+    padding: 4em 2em;
 }
 
 .section-team {
@@ -213,142 +230,20 @@ h1, h2, h3 {
         border-radius: 100px;
         background-color: #eee;
         display: block;
-        margin: 2em;
+        margin: 1em;
         margin-left: auto;
         margin-right: auto;
     }
 }
 
-.address-section {
+footer {;
+    align-items: center;
     background-color: rgba(0, 0, 0, .025);
 
-    .map {
-        position: relative;
-        height: 13em;
-        width: 100%;
-        display: block;
-        border-radius: 3px;
-        border: 0;
-        overflow: hidden;
-        color: $white;
-
-        &:before, &:after {
-            display: block;
-            position: absolute;
-            left: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            transition: 300ms ease-out;
-        }
-
-        &:before {
-            content: "";
-            background-image: url("../../assets/map.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            transform: scale(1);
-        }
-
-        &:after {
-            @extend %overlay;
-
-            content: attr(title);
-            text-align: center;
-            padding: 5.5em 0;
-            text-transform: uppercase;
-            font-weight: 300;
-            opacity: 0;
-        }
-
-        &:hover {
-            &:before { transform: scale(1.05); }
-
-            &:after { opacity: 1; }
-        }
+    .section-content {
+        padding-top: 2em;
+        padding-bottom: 2em;
     }
-}
-
-.photo-stream {
-    .photo {
-        position: relative;
-        display: block;
-        border: 0;
-        border-radius: 3px;
-        overflow: hidden;
-        color: $white;
-
-        > img { display: block; }
-
-        > figcaption {
-            @extend %overlay;
-
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            opacity: 0;
-            transition: 300ms ease-out;
-
-            &:after {
-                content: "#" attr(data-title);
-                display: block;
-                text-align: center;
-                text-transform: uppercase;
-                font-weight: 300;
-                transform: translateY(-50%);
-                margin-top: 50%;
-                width: 100%;
-            }
-        }
-
-        &:before, &:after {
-            content: "";
-            display: block;
-            position: absolute;
-            transition: 300ms ease-out;
-            z-index: 10;
-        }
-
-        &:before {
-            top: 2em;
-            right: 1em;
-            bottom: 2em;
-            left: 1em;
-            border-top: 1px solid currentColor;
-            border-bottom: 1px solid currentColor;
-            transform: scale(0, 1);
-            transform-origin: 0 0;
-        }
-
-        &:after {
-            top: 1em;
-            right: 2em;
-            bottom: 1em;
-            left: 2em;
-            border-right: 1px solid currentColor;
-            border-left: 1px solid currentColor;
-            transform: scale(1, 0);
-            transform-origin: 100% 0;
-        }
-
-        &:hover {
-            > figcaption { opacity: 1; }
-
-            &:before, &:after { transform: scale(1, 1); }
-        }
-    }
-}
-
-.event-section {
-    .event-preview { border-radius: 3px; }
-}
-
-footer {
-    background-color: rgba(0, 0, 0, .025);
 
     .content { font-size: .9em; }
 
