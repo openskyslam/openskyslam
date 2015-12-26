@@ -338,7 +338,7 @@ footer {;
             border: 0;
             border-radius: 50%;
             color: currentColor;
-            background-color: rgba(255, 255, 255, .1);
+            background-color: fade-out(white, .9);
             background-repeat: no-repeat;
             background-position: center;
             background-size: 32px;
