@@ -1,16 +1,21 @@
 {
   "name": "open-sky",
   "version": "1.0.0",
-  "description": "",
+  "description": "Website for Open Sky Slam",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "node-sass": "^3.4.2"
+    "autoprefixer": "^6.2.1",
+    "cssnano": "^3.4.0",
+    "node-sass": "^3.4.2",
+    "opn-cli": "^1.0.0",
+    "postcss-cli": "^2.3.2"
   },
   "scripts": {
+    "start": "./node_modules/opn-cli/cli.js --no-wait index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node-sass src/styles/ -o dist/styles/",
-    "watch": "node-sass --watch src/styles/ -o dist/styles/"
+    "build": "./node_modules/node-sass/bin/node-sass src/styles/ -o dist/styles/ && ./node_modules/postcss-cli/bin/postcss -r -u autoprefixer -u cssnano dist/styles/*",
+    "watch": "./node_modules/node-sass/bin/node-sass --watch src/styles/ -o dist/styles/"
   },
   "repository": {
     "type": "git",
