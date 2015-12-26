@@ -3,16 +3,24 @@
 @import "base";
 @import "grid";
 
-
 $white: #fff;
-$accent: #ff5722;
+$accent: #E36D3F;
+$darkgrey: #221F20;
+$lightgrey: #EBF8FF;
+$yellow: #F7BF37;
+$red: #E76263;
+$blue: #56ACDF;
+$darkpurple: #443B5D;
+$darkred: #7B4644;
+$darkblue: #175081;
+$green: #8FD36B;
 $mobile-screen: "only screen and (min-width: 480px)";
 
 html, body { height: 100%; }
 
 body {
     font-family: Lato, "Open Sans", MundoSans, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.624;
     text-rendering: optimizeLegibility;
 }
@@ -30,7 +38,7 @@ h1, h2, h3 {
     @include banner-image;
 
     position: relative;
-    background-color: black;
+    background-color: $darkred;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -104,6 +112,62 @@ h1, h2, h3 {
         @include banner-image(2, "-potrait");
 
         @include retina(1.3) { @include banner-image(4, "-potrait"); }
+    }
+}
+
+%dark-bg {
+    color: $white;
+
+    p {
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+.about-section {
+    @extend %dark-bg;
+
+    background-color: $darkgrey;
+}
+
+.participate-section {
+    @extend %dark-bg;
+
+    background-color: $red;
+}
+
+.participate-button {
+    padding: .75em 1em;
+    background-color: $yellow;
+    color: $darkgrey;
+    display: block;
+    width: 300px;
+    margin: 2em auto;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 3px;
+    border: 0;
+
+    &:focus, &:hover {
+        background-color: lighten($yellow, 10%);
+    }
+
+    &:active {
+        background-color: darken($yellow, 10%);
+    }
+}
+
+.team-section {
+    text-align: center;
+
+    .team-avatar {
+        height: 200px;
+        width: 200px;
+        border-radius: 100px;
+        display: block;
+        margin: 1em;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -221,24 +285,11 @@ h1, h2, h3 {
     padding: 4em 2em;
 }
 
-.section-team {
-    text-align: center;
-
-    .team-avatar {
-        height: 200px;
-        width: 200px;
-        border-radius: 100px;
-        background-color: #eee;
-        display: block;
-        margin: 1em;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
 footer {;
+    @extend %dark-bg;
+
     align-items: center;
-    background-color: rgba(0, 0, 0, .025);
+    background-color: $darkgrey;
 
     .section-content {
         padding-top: 2em;
@@ -273,9 +324,9 @@ footer {;
             background-position: center;
             background-size: 32px;
             transition: 300ms ease-out;
-            -webkit-filter: invert(100%) grayscale(100%);
-            filter: invert(100%) grayscale(100%);
-            opacity: .5;
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            opacity: .7;
 
             &:hover, &:active {
                 -webkit-filter: none;
