@@ -175,6 +175,32 @@ h1, h2, h3 {
     }
 }
 
+.instagram-stream {
+    @extend %clearfix;
+
+    background-color: $darkgrey;
+
+    &-photo {
+        float: left;
+        height: 50vw;
+        width: 50vw;
+        display: block;
+        background-size: 200%;
+        background-position: center;
+        border: 0;
+
+        @media only screen and (min-width: 40em) {
+            height: 25vw;
+            width: 25vw;
+        };
+
+        @media only screen and (min-width: 80em) {
+            height: 12.5vw;
+            width: 12.5vw;
+        };
+    }
+}
+
 .logo-large {
     height: 300px;
     width: 300px;
@@ -202,18 +228,6 @@ h1, h2, h3 {
 
         @media #{$mobile-screen} { font-size: 1.5em; }
     }
-}
-
-.collage {
-    display: block;
-    margin: auto;
-}
-
-.separator-ornament {
-    display: block;
-    padding: 1em 2em;
-    margin: auto;
-    opacity: .3;
 }
 
 .text-right {

@@ -12,7 +12,7 @@
     "postcss-cli": "^2.3.2"
   },
   "scripts": {
-    "start": "browser-sync start --server --files \"*.html, dist/styles/*\"",
+    "start": "browser-sync start --server --files \"*.html, src/scripts/*, dist/styles/*\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/node-sass/bin/node-sass src/styles/ -o dist/styles/ && ./node_modules/postcss-cli/bin/postcss -r -u autoprefixer -u cssnano dist/styles/*",
     "watch": "./node_modules/node-sass/bin/node-sass --watch src/styles/ -o dist/styles/",
