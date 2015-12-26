@@ -192,12 +192,12 @@ h1, h2, h3 {
         @media only screen and (min-width: 40em) {
             height: 25vw;
             width: 25vw;
-        };
+        }
 
         @media only screen and (min-width: 80em) {
             height: 12.5vw;
             width: 12.5vw;
-        };
+        }
     }
 }
 
@@ -338,35 +338,43 @@ footer {;
             border: 0;
             border-radius: 50%;
             color: currentColor;
+            background-color: rgba(255, 255, 255, .1);
             background-repeat: no-repeat;
             background-position: center;
             background-size: 32px;
             transition: 300ms ease-out;
-            -webkit-filter: grayscale(100%);
-            filter: grayscale(100%);
-            opacity: .7;
-
-            &:hover, &:active {
-                -webkit-filter: none;
-                filter: none;
-                opacity: 1;
-            }
         }
     }
 
     [href*=facebook] {
-        background-color: #3b5998;
         background-image: url('data:image/svg+xml; utf8, <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10.202 3.312h-1.5c-.89 0-1.88.374-1.88 1.663.004.45 0 .88 0 1.363H5.79v1.637h1.06v4.713h1.952V7.944h1.29l.115-1.61H8.77s.005-.717 0-.925c0-.51.532-.48.563-.48h.87V3.31z" fill="white" fill-rule="evenodd"/></svg>');
+
+        &:hover, &:active {
+            background-color: #3b5998;
+        }
     }
 
     [href*=youtube] {
-        background-color: #d34134;
         background-image: url('data:image/svg+xml; utf8, <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8.146 11.33s1.422 0 2.785-.068c1.365-.07 1.614-.446 1.744-1.613.173-1.546-.017-3.6-.017-3.6s-.017-1.26-1.45-1.312c-1.432-.052-3.06-.07-3.06-.07h-.295s-1.627.018-3.06.07C3.36 4.79 3.343 6.05 3.343 6.05s-.19 2.054-.016 3.6c.13 1.166.38 1.543 1.743 1.612 1.362.07 2.784.07 2.784.07h.292zM7.02 6.638v2.69L9.572 8 7.02 6.637z" fill="white" fill-rule="evenodd"/></svg>');
 
+        &:hover, &:active {
+            background-color: #d34134;
+        }
     }
 
     [href*=instagram] {
-        background-color: #3f729b;
-        background-image: url('data:image/svg+xml; utf8, <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><title>instagram</title><path d="M11.865 4h-6.73C4.508 4 4 4.504 4 5.125v6.75C4 12.497 4.508 13 5.135 13h6.73c.627 0 1.135-.503 1.135-1.125v-6.75C13 4.505 12.492 4 11.865 4zM10 8.5c0 .827-.673 1.5-1.5 1.5S7 9.327 7 8.5c0-.25.062-.483.17-.69C7.42 7.33 7.92 7 8.5 7c.578 0 1.08.33 1.33.81.108.207.17.44.17.69zm2 3.075c0 .235-.21.425-.47.425H5.47c-.26 0-.47-.19-.47-.425V8h.775c-.086.246-.134.507-.134.778 0 1.416 1.274 2.568 2.84 2.568 1.564 0 2.838-1.152 2.838-2.568 0-.27-.048-.532-.134-.778H12v3.575zm0-5.13c0 .306-.255.555-.57.555h-.86c-.315 0-.57-.25-.57-.556v-.92c0-.244.16-.45.385-.524h1.046c.315 0 .57.25.57.556v.888z" fill="white" fill-rule="evenodd"/></svg>');
+        background-image: url('data:image/svg+xml; utf8, <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M11.865 4h-6.73C4.508 4 4 4.504 4 5.125v6.75C4 12.497 4.508 13 5.135 13h6.73c.627 0 1.135-.503 1.135-1.125v-6.75C13 4.505 12.492 4 11.865 4zM10 8.5c0 .827-.673 1.5-1.5 1.5S7 9.327 7 8.5c0-.25.062-.483.17-.69C7.42 7.33 7.92 7 8.5 7c.578 0 1.08.33 1.33.81.108.207.17.44.17.69zm2 3.075c0 .235-.21.425-.47.425H5.47c-.26 0-.47-.19-.47-.425V8h.775c-.086.246-.134.507-.134.778 0 1.416 1.274 2.568 2.84 2.568 1.564 0 2.838-1.152 2.838-2.568 0-.27-.048-.532-.134-.778H12v3.575zm0-5.13c0 .306-.255.555-.57.555h-.86c-.315 0-.57-.25-.57-.556v-.92c0-.244.16-.45.385-.524h1.046c.315 0 .57.25.57.556v.888z" fill="white" fill-rule="evenodd"/></svg>');
+
+        &:hover, &:active {
+            background-color: #3f729b;
+        }
+    }
+
+    [href*=twitter] {
+        background-image: url('data:image/svg+xml; utf8, <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.21 5.006c-.376.17-.78.286-1.203.337.432-.265.765-.685.92-1.186a4.136 4.136 0 0 1-1.33.52A2.07 2.07 0 0 0 10.07 4c-1.158 0-2.096.96-2.096 2.145 0 .168.02.332.054.49A5.902 5.902 0 0 1 3.71 4.392c-.18.316-.283.685-.283 1.078 0 .745.37 1.4.932 1.786a2.05 2.05 0 0 1-.95-.268v.027c0 1.04.722 1.906 1.68 2.103a2.052 2.052 0 0 1-.946.037c.267.852 1.04 1.472 1.957 1.49a4.14 4.14 0 0 1-3.1.887 5.83 5.83 0 0 0 3.21.964c3.854 0 5.96-3.268 5.96-6.103 0-.093 0-.185-.005-.277.41-.302.764-.68 1.045-1.11" fill="white"/></svg>');
+
+        &:hover, &:active {
+            background-color: #67AEEB;
+        }
     }
 }
