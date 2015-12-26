@@ -96,17 +96,28 @@ function loadPhotos(err, res) {
     fragment = document.createDocumentFragment();
 
     res.data.forEach(function(p) {
-        var link = document.createElement("a");
+        var link = document.createElement("a"),
+            url;
 
         link.className = "instagram-stream-photo";
         link.target = "_blank";
         link.href = p.link;
 
-        if (window.screen.width <= 360 && window.devicePixelRatio === 1) {
-            link.style.cssText = "background-image: url(" + p.images.low_resolution.url + ")";
+        if (window.devicePixelRatio > 1) {
+            if (window.screen.width <= 360) {
+                url = p.images.low_resolution.url;
+            } else {
+                url = p.images.standard_resolution.url;
+            }
         } else {
-            link.style.cssText = "background-image: url(" + p.images.standard_resolution.url + ")";
+            if (window.screen.width <= 360) {
+                url = p.images.thumbnail.url;
+            } else {
+                url = p.images.low_resolution.url;
+            }
         }
+
+        link.style.cssText = "background-image: url(" + url + ")";
 
         fragment.appendChild(link);
     });
