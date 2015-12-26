@@ -23,6 +23,7 @@ body {
     font-size: 18px;
     line-height: 1.624;
     text-rendering: optimizeLegibility;
+    color: $darkgrey;
 }
 
 h1, h2, h3 {
@@ -118,9 +119,7 @@ h1, h2, h3 {
 %dark-bg {
     color: $white;
 
-    p {
-        -webkit-font-smoothing: antialiased;
-    }
+    p { -webkit-font-smoothing: antialiased; }
 }
 
 .about-section {
@@ -137,28 +136,31 @@ h1, h2, h3 {
 
 .participate-button {
     padding: .75em 1em;
-    background-color: $yellow;
-    color: $darkgrey;
+    border: 2px solid $white;
+    color: $white;
     display: block;
     width: 18em;
     margin: 2em auto 1em;
     text-transform: uppercase;
     text-align: center;
     font-weight: bold;
-    border-radius: 3px;
-    border: 0;
     font-size: .9em;
+    -webkit-font-smoothing: antialiased;
 
     &:focus, &:hover {
-        background-color: lighten($yellow, 10%);
+        border-color: $white;
+        background-color: $white;
+        color: $darkgrey;
     }
 
     &:active {
-        background-color: darken($yellow, 10%);
+        background-color: transparent;
+        color: fade-out($white, .3);
     }
 }
 
 .team-section {
+    background-color: $yellow;
     text-align: center;
 
     .team-avatar {
