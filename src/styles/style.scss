@@ -145,17 +145,17 @@ h1, h2, h3 {
     text-align: center;
     font-weight: bold;
     font-size: .9em;
+    transition: 150ms ease-out;
     -webkit-font-smoothing: antialiased;
 
-    &:focus, &:hover {
+    &:focus, &:hover, &:active {
         border-color: $white;
         background-color: $white;
         color: $darkgrey;
     }
 
     &:active {
-        background-color: transparent;
-        color: fade-out($white, .3);
+        color: fade-out($darkgrey, .5);
     }
 }
 
@@ -188,6 +188,7 @@ h1, h2, h3 {
         background-size: 200%;
         background-position: center;
         border: 0;
+        transition: 150ms ease-out;
 
         @media only screen and (min-width: 40em) {
             height: 25vw;
@@ -197,6 +198,14 @@ h1, h2, h3 {
         @media only screen and (min-width: 80em) {
             height: 12.5vw;
             width: 12.5vw;
+        }
+
+        &:focus, &:hover {
+            opacity: .7;
+        }
+
+        &:active {
+            opacity: .5;
         }
     }
 }
@@ -342,7 +351,7 @@ footer {;
             background-repeat: no-repeat;
             background-position: center;
             background-size: 32px;
-            transition: 300ms ease-out;
+            transition: 150ms ease-out;
         }
     }
 
