@@ -148,4 +148,6 @@ function onDOMReady(cb) {
     }
 }
 
-onDOMReady(instagram(loadPhotos));
+onDOMReady(function() {
+    instagram(loadPhotos);
+});
