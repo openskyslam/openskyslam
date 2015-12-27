@@ -1,5 +1,8 @@
-var CLIENT_ID = "a93dfcee57b64124adc5fbc10181a7d0";
-var TAG = "openskyslam";
+var CLIENT_ID = "a93dfcee57b64124adc5fbc10181a7d0",
+    TAG = "openskyslam",
+    NUM_PHOTOS = 16,
+    STORAGE_KEY = "instagram-photos-" + TAG + "-" + NUM_PHOTOS,
+    PHOTOS_CONTAINER_ID = "instagram-stream";
 
 function jsonp(url, cb) {
     var callbackName = "jsonp_callback_" + Math.round(100000 * Math.random());
@@ -27,7 +30,7 @@ function instagram(cb) {
     var cached, timestamp;
 
     function getPhotos(callback) {
-        jsonp("https://api.instagram.com/v1/tags/" + TAG + "/media/recent?client_id=" + CLIENT_ID + "&count=16", function(err, res) {
+        jsonp("https://api.instagram.com/v1/tags/" + TAG + "/media/recent?client_id=" + CLIENT_ID + "&count=" + NUM_PHOTOS, function(err, res) {
             if (err) {
                 return callback(err);
             }
@@ -37,7 +40,7 @@ function instagram(cb) {
             if (res && res.data && res.data.length) {
                 // Cache the response
                 try {
-                    window.localStorage.setItem("instagram-photos", JSON.stringify({
+                    window.localStorage.setItem(STORAGE_KEY, JSON.stringify({
                         response: res,
                         timestamp: Date.now()
                     }));
@@ -49,7 +52,7 @@ function instagram(cb) {
     }
 
     try {
-        cached = JSON.parse(window.localStorage.getItem("instagram-photos"));
+        cached = JSON.parse(window.localStorage.getItem(STORAGE_KEY));
     } catch (e) {
         // We don't have any cached data
     }
@@ -64,7 +67,7 @@ function instagram(cb) {
             if (isNaN(timestamp) || Date.now() - timestamp > 3600000) {
                 // It's been over an hour
                 try {
-                    window.localStorage.deleteItem("instagram-photos");
+                    window.localStorage.deleteItem(STORAGE_KEY);
                 } catch (e) {
                     // Failed to clear data
                 }
@@ -82,7 +85,9 @@ function instagram(cb) {
 
 // Load instagram photos
 function loadPhotos(err, res) {
-    var stream = document.getElementById("instagram-stream"),
+    var stream,
+        screenWidth,
+        pixelRatio,
         fragment;
 
     if (err) {
@@ -93,31 +98,35 @@ function loadPhotos(err, res) {
         return;
     }
 
+    stream = document.getElementById(PHOTOS_CONTAINER_ID);
+    screenWidth = window.screen.width;
+    pixelRatio = window.devicePixelRatio;
     fragment = document.createDocumentFragment();
 
     res.data.forEach(function(p) {
         var link = document.createElement("a"),
             url;
 
-        link.className = "instagram-stream-photo";
         link.target = "_blank";
         link.href = p.link;
 
-        if (window.devicePixelRatio > 1) {
-            if (window.screen.width <= 360) {
-                url = p.images.low_resolution.url;
-            } else {
+        if (pixelRatio > 1) {
+            if (screenWidth > 640) {
                 url = p.images.standard_resolution.url;
+            } else {
+                url = p.images.low_resolution.url;
             }
         } else {
-            if (window.screen.width <= 360) {
-                url = p.images.thumbnail.url;
-            } else {
+            if (screenWidth > 960) {
+                url = p.images.standard_resolution.url;
+            } else if (screenWidth > 640) {
                 url = p.images.low_resolution.url;
+            } else {
+                url = p.images.thumbnail.url;
             }
         }
 
-        link.style.cssText = "background-image: url(" + url + ")";
+        link.style.backgroundImage = "url(" + url + ")";
 
         fragment.appendChild(link);
     });
@@ -126,14 +135,17 @@ function loadPhotos(err, res) {
     stream.appendChild(fragment);
 }
 
-instagram(function(err, res) {
+// Call the callback on document ready
+function onDOMReady(cb) {
     if (document.readyState === "complete") {
-        loadPhotos(err, res);
+        cb();
     } else {
         document.onreadystatechange = function() {
             if (document.readyState === "complete") {
-                loadPhotos(err, res);
+                cb();
             }
         };
     }
-});
+}
+
+onDOMReady(instagram(loadPhotos));

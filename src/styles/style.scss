@@ -180,7 +180,7 @@ h1, h2, h3 {
 
     background-color: $darkgrey;
 
-    &-photo {
+    > a {
         float: left;
         height: 50vw;
         width: 50vw;
@@ -198,6 +198,11 @@ h1, h2, h3 {
         @media only screen and (min-width: 80em) {
             height: 12.5vw;
             width: 12.5vw;
+        }
+
+        @media only screen and (min-width: 160em) {
+            height: 6.25vw;
+            width: 6.25vw;
         }
 
         &:focus, &:hover {
