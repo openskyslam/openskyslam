@@ -16,7 +16,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/node-sass/bin/node-sass src/styles/ -o dist/styles/ && ./node_modules/postcss-cli/bin/postcss -r -u autoprefixer -u cssnano dist/styles/*",
     "watch": "./node_modules/node-sass/bin/node-sass --watch src/styles/ -o dist/styles/",
-    "publish": "git branch -D gh-pages; npm run build && git checkout -b gh-pages && git add -f dist/ && git commit -m 'Publish' && git push -fu origin gh-pages; git checkout master"
+    "publish": "git branch -D master; npm run build && git checkout -b master && git add -f dist/ && git commit -m 'Publish' && git push -fu origin master; git checkout develop"
   },
   "repository": {
     "type": "git",
